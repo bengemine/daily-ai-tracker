@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c1011">
+  <title>Echo — Find your way back</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/display.woff2?v=2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="masthead">
+    <a class="brand" href="/" aria-label="Echo home"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M7 10h24M7 20h18M7 30h24"/><circle cx="30" cy="20" r="2"/></svg><span>ECHO<span class="brand-period">.</span></span></a>
+    <span class="masthead-label">YOUR CONVERSATION MEMORY</span>
+    <div class="header-actions">
+      <span class="connection" id="connection"><i></i><span>CONNECTING</span></span>
+      <button class="icon-button" id="theme-button" aria-label="Switch to light theme" title="Change theme"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="headline">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="crosshair">+</span> NOTHING LOST. JUST WAITING.</div>
+        <h1 id="headline">Find your <br>way <span class="serif-word">back.</span><span class="headline-dot">↗</span></h1>
+        <p class="intro">A half-remembered idea. An unfinished thought.<br>Tell Echo what stayed with you. Pick up the conversation.</p>
+        <div class="hero-index"><span class="index-bar"></span><span id="archive-size">READING YOUR ARCHIVE</span><span class="index-coordinate">01 / ∞</span></div>
+      </div>
+      <div class="observatory" aria-hidden="true">
+        <div class="orbit-label orbit-label-top"><span>MEMORY FIELD</span><span class="orbit-marker">◈</span></div>
+        <canvas id="memory-field"></canvas>
+        <div class="orbit-center"><span class="orbit-center-dot"></span><span>EVERY THREAD CONNECTS</span></div>
+        <div class="orbit-label orbit-label-bottom"><span id="field-caption">PAST → PRESENT</span><span>∞</span></div>
+        <span class="orbit-coordinate coordinate-left">E — 001</span>
+        <span class="orbit-coordinate coordinate-right">CONTINUITY</span>
+      </div>
+    </section>
+
+    <section class="search-section" aria-label="Find a conversation">
+      <div class="search-heading"><label for="memory">WHAT DO YOU REMEMBER?</label><button id="focus-search" class="shortcut" aria-label="Focus search">CTRL K</button></div>
+      <form id="search-form">
+        <div class="search-shell">
+          <span class="input-symbol" aria-hidden="true">↳</span>
+          <textarea id="memory" name="memory" rows="2" maxlength="3000" placeholder="That conversation where we figured out…" aria-describedby="search-help" required></textarea>
+          <button class="search-button" id="search-button" type="submit"><span>Find the thread</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+        <div class="search-options">
+          <div class="agent-filters" role="group" aria-label="Agent to search"><button type="button" class="filter active" data-filter="" aria-pressed="true">All agents</button><button type="button" class="filter" data-filter="Claude" aria-pressed="false">Claude</button><button type="button" class="filter" data-filter="Codex" aria-pressed="false">Codex</button></div>
+          <label class="auto-option"><input id="auto-resume" type="checkbox" checked><span class="switch" aria-hidden="true"></span><span>Auto-open a clear match</span></label>
+        </div>
+      </form>
+      <p class="search-help" id="search-help">AI follows the clues, reads the conversations, and finds where you left off. <span>Enter to search · Shift + Enter for a new line</span></p>
+    </section>
+
+    <section id="progress" class="progress-panel" aria-live="polite" hidden>
+      <div class="progress-symbol" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="progress-copy"><span class="eyebrow" id="progress-phase">FOLLOWING THE SIGNAL</span><h2 id="progress-message">Searching your conversations…</h2><p id="progress-detail">Your existing Codex login · no API key</p></div>
+      <div class="progress-actions"><span id="elapsed">00:00</span><button id="cancel-search" class="text-button">Cancel search <span>×</span></button></div>
+      <div class="progress-track" aria-hidden="true"><span></span></div>
+    </section>
+
+    <div id="notice" class="notice" role="status" hidden></div>
+
+    <section id="results" class="results" aria-labelledby="results-title" hidden>
+      <div class="section-top"><div><div class="eyebrow" id="results-eyebrow">SIGNAL FOUND</div><h2 id="results-title">Does this take you back?</h2></div><span id="match-count" class="mono"></span></div>
+      <p id="results-explanation" class="results-explanation"></p>
+      <div id="match-list"></div>
+      <div id="no-match" class="no-match" hidden><span aria-hidden="true">⌁</span><h3>Let's follow another clue.</h3><p id="followup-question"></p><button class="text-button" id="add-clue">Add a detail <span>↗</span></button></div>
+    </section>
+
+    <section class="recent-section" id="recent-section" aria-labelledby="recent-title">
+      <div class="section-top recent-top"><div class="recent-label"><span class="tiny-cross">+</span><h2 id="recent-title">RECENT THREADS</h2><span class="muted">A few places you've been.</span></div><button id="refresh-archive" class="text-button">Refresh archive <span>↻</span></button></div>
+      <div id="recent-list" class="recent-list"><p class="muted">Your archive is waking up…</p></div>
+    </section>
+  </main>
+
+  <footer><span class="footer-status"><i></i>LOCAL ARCHIVE · CODEX-POWERED SEARCH</span><span id="index-status">Connecting to your conversations…</span><span class="footer-end">THE PAST IS A STARTING POINT.</span></footer>
+
+  <dialog id="preview-dialog" aria-labelledby="preview-title">
+    <div class="dialog-top"><div><div class="eyebrow">SAVED CONVERSATION</div><h2 id="preview-title">Conversation preview</h2></div><button id="close-preview" class="icon-button" aria-label="Close preview">×</button></div>
+    <p id="preview-meta" class="mono muted"></p><pre id="preview-content"></pre><button id="more-preview" class="text-button" hidden>Read more ↓</button>
+  </dialog>
+</body>
+</html>

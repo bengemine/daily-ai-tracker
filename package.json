@@ -1,0 +1,18 @@
+{
+  "name": "daily-ai-tracker",
+  "version": "1.0.0",
+  "description": "Writes a daily journal of your work with AI coding agents, from their local session files.",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "index": "node index-conversations.js",
+    "track": "node tracker.js",
+    "control-panel": "node control-panel.js",
+    "test": "npm run test:tracker && npm run test:echo",
+    "test:tracker": "node --test test/*.test.js",
+    "test:echo": "cd echo && node --test test/*.test.mjs && python3 -B -m unittest discover -s test -p \"*_test.py\""
+  }
+}

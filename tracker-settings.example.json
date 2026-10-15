@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "provider": "claude",
+  "model": "sonnet",
+  "reasoning": "medium",
+  "customInstructions": "",
+  "timeoutMs": 10800000
+}

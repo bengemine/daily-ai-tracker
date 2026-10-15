@@ -1,0 +1,14 @@
+{
+  "name": "echo-conversation-finder",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test test/*.test.mjs && python3 -B -m unittest discover -s test -p '*_test.py'"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT"
+}
